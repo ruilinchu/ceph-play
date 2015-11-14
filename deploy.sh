@@ -30,7 +30,7 @@ EOF
 mkdir -p /etc/pdsh
 grep 10.0. /etc/hosts | awk '{print $2}' > /etc/pdsh/machines
 
-yum install -y pdsh/*.rpm
+./build_pdsh_rpm.sh
 
 ssh-keygen -t rsa
 for i in `grep 10.0.15 /etc/hosts | awk '{print $2}'`; do
