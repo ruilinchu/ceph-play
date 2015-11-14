@@ -1,3 +1,4 @@
+service ceph restart mds
 mkdir -p /mnt/kernel_cephfs
 mount -t ceph 10.0.15.11:6789:/ /mnt/kernel_cephfs -o name=admin,secret=`ceph-authtool -p /etc/ceph/ceph.client.admin.keyring`
 dd if=/dev/zero of=/mnt/kernel_cephfs/$HOSTNAME-file count=200 bs=1M
