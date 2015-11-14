@@ -10,6 +10,6 @@ sudo su
 
 install pdsh and run test
 
-pdsh < test
+pdsh -w chunk[1-3] < test
 
 ```
