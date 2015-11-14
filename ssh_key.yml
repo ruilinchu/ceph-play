@@ -1,0 +1,19 @@
+- hosts: all
+  sudo: no
+  gather_facts: no
+  remote_user: root
+
+  tasks:
+    - name: install ssh key
+      authorized_key: user=root key="{{ lookup('file', '/root/.ssh/id_rsa.pub') }}" state=present
+
+    - name: /etc/hosts 
+      lineinfile: dest=/etc/hosts line="{{ item }}"
+      with_items:
+        - "10.0.15.11 chunk1"
+        - "10.0.15.12 chunk2"
+        - "10.0.15.13 chunk3"
+
+    - yum: name=ntp
+
+    - service: name=ntpd state=started
