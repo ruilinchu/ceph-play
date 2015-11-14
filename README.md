@@ -6,6 +6,11 @@ vagrant ssh chunk1
 cd /vagrant
 sudo su
 ./deploy.sh
+
+# if error out try once more
+ansible-playbook ceph-ansible-master/site.yml
+
+# cephfs write test
 ./test.sh
 
 [root@chunk1 vagrant]# ceph -s
@@ -19,7 +24,6 @@ sudo su
             1518 MB used, 78950 MB / 80468 MB avail
                  768 active+clean
 
-[root@chunk1 vagrant]# pdsh -w chunk[1-3] < test
 
 pdsh> mkdir -p /mnt/kernel_cephfs
 pdsh> mount -t ceph 10.0.15.11:6789:/ /mnt/kernel_cephfs -o name=admin,secret=`ceph-authtool -p /etc/ceph/ceph.client.admin.keyring`
