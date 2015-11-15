@@ -44,6 +44,7 @@ unzip master.zip
 ./edit_ceph-ansible-master.sh
 
 ansible-playbook ceph-ansible-master/site.yml
+ansible-playbook ceph-ansible-master/site.yml
 
 ## expect to run site.yml mulltiple times
 
