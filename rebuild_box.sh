@@ -3,7 +3,7 @@
 yum -y update
 rpm -Uhv http://ceph.com/rpm-hammer/el7/noarch/ceph-release-1-1.el7.noarch.rpm
 yum -y install epel-release
-yum -y install ntp snappy leveldb gdisk python-argparse gperftools-libs attr
+yum -y install ntp snappy leveldb gdisk python-argparse gperftools-libs python-pycurl hdparm yum-plugin-priorities.noarch
 yum -y install ceph ceph-deploy --disablerepo=epel
 systemctl enable ntpd
 
