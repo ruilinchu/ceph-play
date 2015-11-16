@@ -39,8 +39,6 @@ done > ~/.ssh/known_hosts
 
 ansible-playbook ssh_key.yml --ask-pass 
 
-wget https://github.com/ceph/ceph-ansible/archive/master.zip
-unzip master.zip
 ./edit_ceph-ansible-master.sh
 
 ansible-playbook ceph-ansible-master/site.yml

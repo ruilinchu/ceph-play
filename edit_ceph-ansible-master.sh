@@ -1,3 +1,11 @@
+rm -fr ./ceph-ansible-master
+if [ -f ./master.zip ]; then
+    unzip master.zip
+else
+    wget https://github.com/ceph/ceph-ansible/archive/master.zip
+    unzip master.zip
+fi
+
 cat > ceph-ansible-master/group_vars/all <<EOF
 
 fetch_directory: fetch/

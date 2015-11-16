@@ -13,5 +13,5 @@ sleep 30
 ceph fs ls
 ceph -s
 
-pdsh -w chunk[1-3] < test
+#pdsh -w chunk[1-3] < test
 
