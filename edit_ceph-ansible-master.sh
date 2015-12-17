@@ -41,7 +41,12 @@ EOF
 
 cat > ceph-ansible-master/group_vars/osds <<EOF
 
-osd_auto_discovery: true
+devices:
+  - /dev/sdb
+  - /dev/sdc
+  - /dev/sdd
+
+osd_auto_discovery: false
 journal_collocation: true
 
 EOF

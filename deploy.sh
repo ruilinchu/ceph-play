@@ -30,7 +30,7 @@ EOF
 mkdir -p /etc/pdsh
 grep 10.0. /etc/hosts | awk '{print $2}' > /etc/pdsh/machines
 
-./build_pdsh_rpm.sh
+#./build_pdsh_rpm.sh
 
 ssh-keygen -t rsa
 for i in `grep 10.0.15 /etc/hosts | awk '{print $2}'`; do
@@ -40,9 +40,12 @@ done > ~/.ssh/known_hosts
 ansible-playbook ssh_key.yml --ask-pass 
 
 ./edit_ceph-ansible-master.sh
-cp ceph-ansible-master/site.yml.sample ceph-ansible-master/site.yml
-ansible-playbook ceph-ansible-master/site.yml
-ansible-playbook ceph-ansible-master/site.yml
+
+cd ceph-ansible-master
+
+cp site.yml.sample site.yml
+ansible-playbook site.yml
+#ansible-playbook site.yml
 
 ## expect to run site.yml mulltiple times
 
