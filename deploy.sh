@@ -40,7 +40,7 @@ done > ~/.ssh/known_hosts
 ansible-playbook ssh_key.yml --ask-pass 
 
 ./edit_ceph-ansible-master.sh
-
+cp ceph-ansible-master/site.yml.sample ceph-ansible-master/site.yml
 ansible-playbook ceph-ansible-master/site.yml
 ansible-playbook ceph-ansible-master/site.yml
 
