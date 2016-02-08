@@ -17,7 +17,7 @@ mds_group_name: mdss
 ceph_origin: 'upstream' # or 'distro'
 ceph_stable: true # use ceph stable branch
 ceph_stable_key: https://download.ceph.com/keys/release.asc
-ceph_stable_release: hammer # ceph stable release
+ceph_stable_release: infernalis 
 
 ceph_stable_redhat_distro: el7
 ceph_dev_redhat_distro: centos7

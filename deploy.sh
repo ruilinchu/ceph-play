@@ -2,23 +2,29 @@
 yum install epel-release -y
 yum install ansible unzip -y
 cat > /etc/ansible/hosts <<EOF 
-
 [mons]
-chunk[1:3]
+ceph-mon[1:3]
 
 [osds]
-chunk[1:3]
+ceph-osd[1:3]
 
 [mdss]
-chunk3
+ceph-mds[1:2]
 
 EOF
 
 cat >> /etc/hosts <<EOF
 
-10.0.15.11 chunk1
-10.0.15.12 chunk2
-10.0.15.13 chunk3
+10.0.15.11 ceph-mon1
+10.0.15.12 ceph-mon2
+10.0.15.13 ceph-mon3
+
+10.0.15.21 ceph-osd1
+10.0.15.22 ceph-osd2
+10.0.15.23 ceph-osd3
+
+10.0.15.31 ceph-mds1
+10.0.15.32 ceph-mds2
 
 EOF
 
