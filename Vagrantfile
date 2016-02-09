@@ -26,7 +26,7 @@ Vagrant.configure("2") do |config|
       node.vm.network :private_network, ip: "10.0.15.2#{i}"
       #       node.vm.network "forwarded_port", guest: 80, host: "808#{i}"
       node.vm.provider "virtualbox" do |vb|
-        vb.memory = "512"
+        vb.memory = "750"
         (0..2).each do |d|
           vb.customize ['createhd',
                         '--filename', "osd-disk-#{i}-#{d}",

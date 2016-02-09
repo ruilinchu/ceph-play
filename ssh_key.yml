@@ -19,6 +19,9 @@
         - "10.0.15.31 ceph-mds1"
         - "10.0.15.32 ceph-mds2"
 
+    - yum: name=redhat-lsb-core
+
     - yum: name=ntp
 
     - service: name=ntpd state=started
+
