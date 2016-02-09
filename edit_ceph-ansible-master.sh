@@ -1,3 +1,7 @@
+#!/bin/bash
+
+yum install -y unzip
+
 rm -fr ./ceph-ansible-master
 if [ -f ./master.zip ]; then
     unzip master.zip

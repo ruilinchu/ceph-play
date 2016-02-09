@@ -1,6 +1,7 @@
 #!/bin/bash
 yum install epel-release -y
-yum install ansible unzip -y
+yum install ansible -y
+
 cat > /etc/ansible/hosts <<EOF 
 [mons]
 ceph-mon[1:3]
@@ -47,10 +48,10 @@ ansible-playbook ssh_key.yml --ask-pass
 
 ./edit_ceph-ansible-master.sh
 
-cd ceph-ansible-master
+#cd ceph-ansible-master
 
-cp site.yml.sample site.yml
-ansible-playbook site.yml
+#cp site.yml.sample site.yml
+#ansible-playbook site.yml
 #ansible-playbook site.yml
 
 ## expect to run site.yml mulltiple times
