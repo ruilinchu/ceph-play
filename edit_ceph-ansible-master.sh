@@ -14,6 +14,8 @@ mon_group_name: mons
 osd_group_name: osds
 mds_group_name: mdss
 
+upgrade_ceph_packages: true
+
 ceph_origin: 'upstream' # or 'distro'
 ceph_stable: true # use ceph stable branch
 ceph_stable_key: https://download.ceph.com/keys/release.asc
@@ -35,7 +37,12 @@ journal_size: 2048
 pool_default_pg_num: 256
 pool_default_pgp_num: 256
 
+pool_default_size: 3
+pool_default_min_size: 2
+
 public_network:  10.0.15.0/24
+
+enable_debug_mon: true
 
 os_tuning_params:
   - { name: kernel.pid_max, value: 4194303 }
