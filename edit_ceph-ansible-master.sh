@@ -37,6 +37,10 @@ pool_default_pgp_num: 256
 
 public_network:  10.0.15.0/24
 
+os_tuning_params:
+  - { name: kernel.pid_max, value: 4194303 }
+  - { name: fs.file-max, value: 26234859 }
+
 EOF
 
 cat > ceph-ansible-master/group_vars/osds <<EOF
