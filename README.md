@@ -1,8 +1,6 @@
-# ceph-play
-
 ```
 vagrant up
-vagrant ssh chunk1
+vagrant ssh 
 cd /vagrant
 sudo su
 ./deploy.sh
@@ -39,5 +37,19 @@ chunk3: 200+0 records out
 chunk3: 209715200 bytes (210 MB) copied, 5.351 s, 39.2 MB/s
 pdsh>
 
+issues:
+1. quote these numbers 
+0755
+0600
+0644
+0770
+in "roles/ceph-common/tasks/main.yml", or ansible fail
+
+2. need to manually enable and start mds service:
+ln -s /usr/lib/systemd/system/ceph-mds\@.service /etc/systemd/system/multi-user.target.wants/ceph-mds@$HOSTNAME.service
+systemctl enable ceph-mds@$HOSTNAME
+systemctl start ceph-mds@$HOSTNAME
+
+3. sometimes ceph.conf file in mds nodes does not contain the mon nodes' info.
 
 ```   
