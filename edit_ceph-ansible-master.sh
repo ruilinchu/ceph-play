@@ -28,6 +28,7 @@ ceph_stable_release: infernalis
 ceph_stable_redhat_distro: el7
 ceph_dev_redhat_distro: centos7
 
+fsid: "c5f1483a-4cf6-4d7f-9c64-d1de2a245686"
 cephx: true
 cephx_require_signatures: false # Kernel RBD does NOT support signatures!
 cephx_cluster_require_signatures: false
@@ -35,6 +36,7 @@ cephx_service_require_signatures: false
 rbd_default_format: 2
 
 monitor_interface: enp0s8
+monitor_secret: "AQDyeLtWAAAAABAASo+WI6kCgFX3oLai51z/IQ=="
 
 journal_size: 2048
 
