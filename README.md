@@ -54,4 +54,6 @@ systemctl start ceph-mds@$HOSTNAME
 
 3. sometimes ceph.conf file in mds nodes does not contain the mon nodes' info.
 
+4. mon nodes need to create /var/run/ceph/rbd-clients/, or socket bind_and_listen errors, not critical
+
 ```   
