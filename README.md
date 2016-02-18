@@ -1,15 +1,17 @@
 ```
-vagrant up
-vagrant ssh 
-cd /vagrant
-sudo su
-./deploy.sh
+$vagrant up
+$vagrant ssh 
+$cd /vagrant
+$sudo su
+#./deploy.sh
 
-# if error out try once more
-ansible-playbook ceph-ansible-master/site.yml
+## if error out try once more
+#cd ceph-ansible-master
+## !! not in the directory can cause ansible module errors
+#ansible-playbook site.yml
 
-# cephfs write test
-./test.sh
+## cephfs write test
+#./test.sh
 
 [root@chunk1 vagrant]# ceph -s
   cluster a27d76e2-479c-4305-9f34-3bd7e2699fff
