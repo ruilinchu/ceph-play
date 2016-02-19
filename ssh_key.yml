@@ -7,21 +7,9 @@
     - name: install ssh key
       authorized_key: user=root key="{{ lookup('file', '/root/.ssh/id_rsa.pub') }}" state=present
 
-    - name: /etc/hosts 
-      lineinfile: dest=/etc/hosts line="{{ item }}"
-      with_items:
-        - "10.0.15.11 ceph-mon1"
-        - "10.0.15.12 ceph-mon2"
-        - "10.0.15.13 ceph-mon3"
-        - "10.0.15.21 ceph-osd1"
-        - "10.0.15.22 ceph-osd2"
-        - "10.0.15.23 ceph-osd3"
-        - "10.0.15.31 ceph-mds1"
-        - "10.0.15.32 ceph-mds2"
-
     - yum: name=redhat-lsb-core
 
     - yum: name=ntp
 
-    - service: name=ntpd state=started
+    - service: name=ntpd state=started enabled=yes
 
