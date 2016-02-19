@@ -38,7 +38,7 @@ for i in `grep 10.0.15 /etc/hosts | awk '{print $2}'`; do
     ssh-keyscan $i;
 done > ~/.ssh/known_hosts
 
-ansible-playbook ssh_key2.yml --ask-pass 
+ansible-playbook ssh_key.yml --ask-pass 
 
 ./edit_ceph-ansible-master.sh
 
