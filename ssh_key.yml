@@ -7,9 +7,11 @@
     - name: install ssh key
       authorized_key: user=root key="{{ lookup('file', '/root/.ssh/id_rsa.pub') }}" state=present
 
-    - yum: name=redhat-lsb-core
-
-    - yum: name=ntp
+    - yum: name={{ item }}
+      with_items:
+        - redhat-lsb-core
+        - name=ntp
+        - atop
 
     - service: name=ntpd state=started enabled=yes
 
