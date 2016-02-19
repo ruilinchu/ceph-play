@@ -72,4 +72,15 @@ systemctl start ceph-mds@$HOSTNAME
 
 4. mon nodes need to create /var/run/ceph/rbd-clients/, or socket bind_and_listen errors, not critical
 
+To add OSD nodes (by Sébastien Han):
+* ran 'ceph fsid' to pick up the uuid used and edited group_vars/{all,mons,osds} with it (var fsid)
+* collected the monitor keyring here: /var/lib/ceph/mon/ceph-ceph-eno1/keyring and put it in group_vars/mons on monitor_secret
+* configured the monitor_interface variable in group_vars/all, this one might be tricky make sure that ceph-deploy used the right interface beforehand
+* change the journal_size variable in group_vars/all and used 5120 (ceph-deploy default)
+* change the public_network and cluster_network variables in group_vars/all
+* removed everything in ~./ceph-ansible/fetch
+* configure ceph-ansible to use a dedicated journal (journal_collocation: false and raw_multi_journal: true and edited raw_journal_devices variable)
+
+Eventually ran “ansible-playbook site.yml”
+
 ```   
