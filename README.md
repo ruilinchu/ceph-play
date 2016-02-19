@@ -13,32 +13,48 @@ $sudo su
 ## cephfs write test
 #./test.sh
 
-[root@chunk1 vagrant]# ceph -s
-  cluster a27d76e2-479c-4305-9f34-3bd7e2699fff
-     health HEALTH_OK
-     monmap e1: 3 mons at {chunk1=10.0.15.11:6789/0,chunk2=10.0.15.12:6789/0,chunk3=10.0.15.13:6789/0}
-            election epoch 4, quorum 0,1,2 chunk1,chunk2,chunk3
-     mdsmap e15: 1/1/1 up {0=chunk3=up:active}
-     osdmap e32: 9 osds: 9 up, 9 in
-      pgmap v117: 768 pgs, 3 pools, 600 MB data, 170 objects
-            1518 MB used, 78950 MB / 80468 MB avail
-                 768 active+clean
+[root@ceph-osd1 ceph-play]# ceph -w
+    cluster c5f1483a-4cf6-4d7f-9c64-d1de2a245686
+    health HEALTH_OK
+    monmap e1: 3 mons at {ceph-osd1=10.0.15.21:6789/0,ceph-osd2=10.0.15.22:6789/0,ceph-osd3=10.0.15.23:6789/0}
+           election epoch 42, quorum 0,1,2 ceph-osd1,ceph-osd2,ceph-osd3
+    mdsmap e25: 1/1/1 up {0=ceph-osd1=up:active}, 1 up:standby
+    osdmap e152: 12 osds: 12 up, 12 in
+           flags sortbitwise
+    pgmap v16751: 768 pgs, 3 pools, 19362 MB data, 8016 objects
+          58674 MB used, 48617 MB / 104 GB avail
+                768 active+clean
 
+2016-02-19 00:45:50.387653 mon.0 [INF] pgmap v16751: 768 pgs: 768 active+clean; 19362 MB data, 58674 MB used, 48617 MB / 104 GB avail
+2016-02-19 00:55:44.631846 mon.0 [INF] pgmap v16752: 768 pgs: 768 active+clean; 19362 MB data, 58674 MB used, 48617 MB / 104 GB avail; 7059 B/s rd, 0 op/s
+2016-02-19 00:55:45.755423 mon.0 [INF] pgmap v16753: 768 pgs: 768 active+clean; 19362 MB data, 58674 MB used, 48617 MB / 104 GB avail; 110 kB/s rd, 3 B/s wr, 0 op/s
+2016-02-19 00:55:46.817228 mon.0 [INF] pgmap v16754: 768 pgs: 768 active+clean; 19362 MB data, 58674 MB used, 48617 MB / 104 GB avail; 54558 kB/s rd, 924 B/s wr, 27 op/s
+2016-02-19 00:55:47.896390 mon.0 [INF] pgmap v16755: 768 pgs: 768 active+clean; 19362 MB data, 58674 MB used, 48617 MB / 104 GB avail; 38227 kB/s rd, 18 op/s
+2016-02-19 00:55:48.927312 mon.0 [INF] pgmap v16756: 768 pgs: 768 active+clean; 19362 MB data, 58674 MB used, 48617 MB / 104 GB avail; 24889 kB/s rd, 12 op/s
+2016-02-19 00:55:50.081512 mon.0 [INF] pgmap v16757: 768 pgs: 768 active+clean; 19362 MB data, 58674 MB used, 48617 MB / 104 GB avail; 37769 kB/s rd, 18 op/s
+2016-02-19 00:55:51.103730 mon.0 [INF] pgmap v16758: 768 pgs: 768 active+clean; 19362 MB data, 58674 MB used, 48617 MB / 104 GB avail; 116 MB/s rd, 58 op/s
 
-pdsh> mkdir -p /mnt/kernel_cephfs
-pdsh> mount -t ceph 10.0.15.11:6789:/ /mnt/kernel_cephfs -o name=admin,secret=`ceph-authtool -p /etc/ceph/ceph.client.admin.keyring`
-pdsh> dd if=/dev/zero of=/mnt/kernel_cephfs/$HOSTNAME-file count=200 bs=1M
-chunk1: 200+0 records in
-chunk1: 200+0 records out
-chunk1: 209715200 bytes (210 MB) copied, 3.04563 s, 68.9 MB/s
-chunk2: 200+0 records in
-chunk2: 200+0 records out
-chunk2: 209715200 bytes (210 MB) copied, 3.55516 s, 59.0 MB/s
-chunk3: 200+0 records in
-chunk3: 200+0 records out
-chunk3: 209715200 bytes (210 MB) copied, 5.351 s, 39.2 MB/s
-pdsh>
+[root@ceph-osd1 ceph-play]# ls /var/run/ceph/
+ceph-mds.ceph-osd1.asok  ceph-mon.ceph-osd1.asok  ceph-osd.2.asok  ceph-osd.5.asok  ceph-osd.7.asok  rbd-clients
 
+[root@ceph-osd1 ceph-play]# ceph daemonperf mon.ceph-osd1
+--paxos-- -----mon------
+cmt  clat|sess sadd srm |
+  0    0 |  8    0    0
+  0    0 |  8    0    0
+    
+[root@ceph-osd1 ceph-play]# ceph daemonperf mds.ceph-osd1
+-----mds------ --mds_server-- ---objecter--- -----mds_cache----- ---mds_log----
+rlat inos caps|hsr  hcs  hcr |writ read actv|recd recy stry purg|segs evts subm|
+  0  7.1k 1.5k|  0    0    0 |  0    0    0 |  0    0  3.5k   0 | 30   24k   0
+  0  7.1k 1.5k|  0    0    0 |  0    0    0 |  0    0  3.5k   0 | 30   24k   0
+
+[root@ceph-osd1 ceph-play]# ceph daemonperf osd.2
+---objecter--- -----------osd-----------
+writ read actv|recop rd   wr   lat  ops |
+  0    0    0 |   0    0    0    0    0
+  0    0    0 |   0    0    0    0    0
+    
 issues:
 1. quote these numbers 
 0755
