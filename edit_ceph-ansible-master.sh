@@ -68,3 +68,7 @@ journal_collocation: true
 
 EOF
 
+sed -i 's+0755+\"0755\"+g' ceph-ansible-master/roles/ceph-common/tasks/main.yml
+sed -i 's+0600+\"0600\"+g' ceph-ansible-master/roles/ceph-common/tasks/main.yml
+sed -i 's+0644+\"0644\"+g' ceph-ansible-master/roles/ceph-common/tasks/main.yml
+sed -i 's+0770+\"0770\"+g' ceph-ansible-master/roles/ceph-common/tasks/main.yml
