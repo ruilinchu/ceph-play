@@ -40,8 +40,8 @@ monitor_secret: "AQDyeLtWAAAAABAASo+WI6kCgFX3oLai51z/IQ=="
 
 journal_size: 2048
 
-pool_default_pg_num: 128
-pool_default_pgp_num: 128
+pool_default_pg_num: 64
+pool_default_pgp_num: 64
 
 pool_default_size: 3
 pool_default_min_size: 2
