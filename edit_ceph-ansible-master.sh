@@ -43,8 +43,8 @@ journal_size: 2048
 pool_default_pg_num: 64
 pool_default_pgp_num: 64
 
-pool_default_size: 3
-pool_default_min_size: 2
+pool_default_size: 2
+pool_default_min_size: 1
 
 public_network:  10.0.15.0/24
 
