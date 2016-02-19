@@ -74,6 +74,7 @@ sed -i 's+0644+\"0644\"+g' ceph-ansible-master/roles/ceph-common/tasks/main.yml
 sed -i 's+0770+\"0770\"+g' ceph-ansible-master/roles/ceph-common/tasks/main.yml
 
 cat >> ceph-ansible-master/roles/ceph-mds/tasks/pre_requisite.yml <<EOF
+  failed_when: false
 
 - name: enable systemd unit file for mds instance (for or after infernalis)
   file:

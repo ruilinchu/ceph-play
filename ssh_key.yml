@@ -7,6 +7,8 @@
     - name: install ssh key
       authorized_key: user=root key="{{ lookup('file', '/root/.ssh/id_rsa.pub') }}" state=present
 
+    - yum: name=epel-release
+      
     - yum: name={{ item }}
       with_items:
         - redhat-lsb-core
