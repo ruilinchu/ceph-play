@@ -10,7 +10,7 @@
     - yum: name={{ item }}
       with_items:
         - redhat-lsb-core
-        - name=ntp
+        - ntp
         - atop
 
     - service: name=ntpd state=started enabled=yes
