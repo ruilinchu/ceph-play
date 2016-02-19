@@ -54,7 +54,17 @@ rlat inos caps|hsr  hcs  hcr |writ read actv|recd recy stry purg|segs evts subm|
 writ read actv|recop rd   wr   lat  ops |
   0    0    0 |   0    0    0    0    0
   0    0    0 |   0    0    0    0    0
-    
+
+[root@ceph-osd1 ceph-play]# ceph df
+GLOBAL:
+    SIZE     AVAIL      RAW USED     %RAW USED
+    104G     48617M       58674M         54.69
+POOLS:
+    NAME                ID     USED       %USED     MAX AVAIL     OBJECTS
+    rbd                 0           0         0         9840M           0
+    cephfs_data         1      19323M     18.01         9840M        7986
+    cephfs_metadata     2      39230k      0.04         9840M          30
+			
 issues:
 1. quote these numbers 
 0755
