@@ -72,3 +72,28 @@ sed -i 's+0755+\"0755\"+g' ceph-ansible-master/roles/ceph-common/tasks/main.yml
 sed -i 's+0600+\"0600\"+g' ceph-ansible-master/roles/ceph-common/tasks/main.yml
 sed -i 's+0644+\"0644\"+g' ceph-ansible-master/roles/ceph-common/tasks/main.yml
 sed -i 's+0770+\"0770\"+g' ceph-ansible-master/roles/ceph-common/tasks/main.yml
+
+cat >> ceph-ansible-master/roles/ceph-mds/tasks/pre_requisite.yml <<EOF
+
+- name: enable systemd unit file for mds instance (for or after infernalis)
+  file:
+    src: /usr/lib/systemd/system/ceph-mds@.service
+    dest: /etc/systemd/system/multi-user.target.wants/ceph-mds@{{ ansible_hostname }}.service
+    state: link
+  changed_when: false
+  failed_when: false
+  when:
+    ansible_distribution != "Ubuntu" and
+    is_ceph_infernalis
+
+- name: start and add that the mds service to the init sequence (for or after infernalis)
+  service:
+      name: ceph-mds@{{ ansible_hostname }}
+      state: started
+      enabled: yes
+  changed_when: false
+  when:
+    ansible_distribution != "Ubuntu" and
+    is_ceph_infernalis
+
+EOF
