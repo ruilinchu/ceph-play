@@ -66,21 +66,12 @@ POOLS:
     cephfs_metadata     2      39230k      0.04         9840M          30
 			
 issues:
-1. quote these numbers 
-0755
-0600
-0644
-0770
-in "roles/ceph-common/tasks/main.yml", or ansible fail
-
-2. need to manually enable and start mds service:
+* need to manually enable and start mds service:
 ln -s /usr/lib/systemd/system/ceph-mds\@.service /etc/systemd/system/multi-user.target.wants/ceph-mds@$HOSTNAME.service
 systemctl enable ceph-mds@$HOSTNAME
 systemctl start ceph-mds@$HOSTNAME
 
-3. sometimes ceph.conf file in mds nodes does not contain the mon nodes' info.
-
-4. mon nodes need to create /var/run/ceph/rbd-clients/, or socket bind_and_listen errors, not critical
+* mon nodes need to create /var/run/ceph/rbd-clients/, or socket bind_and_listen errors, not critical
 
 To add OSD nodes (by Sébastien Han):
 * ran 'ceph fsid' to pick up the uuid used and edited group_vars/{all,mons,osds} with it (var fsid)
@@ -92,5 +83,7 @@ To add OSD nodes (by Sébastien Han):
 * configure ceph-ansible to use a dedicated journal (journal_collocation: false and raw_multi_journal: true and edited raw_journal_devices variable)
 
 Eventually ran “ansible-playbook site.yml”
+
+or just run "ansible-playbook osd-configure.yml"
 
 ```   
