@@ -1,6 +1,8 @@
 #!/bin/bash
 yum install epel-release -y
 yum install ansible -y
+yum install -y https://yum.puppetlabs.com/puppetlabs-release-el-7.noarch.rpm
+yum install -y pdsh
 
 cat > /etc/ansible/hosts <<EOF 
 [mons]
@@ -36,8 +38,6 @@ EOF
 
 mkdir -p /etc/pdsh
 grep 10.0. /etc/hosts | awk '{print $2}' > /etc/pdsh/machines
-
-#./build_pdsh_rpm.sh
 
 ssh-keygen -t rsa
 for i in `grep 10.0.15 /etc/hosts | awk '{print $2}'`; do
