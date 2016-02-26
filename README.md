@@ -65,12 +65,6 @@ POOLS:
     cephfs_data         1      19323M     18.01         9840M        7986
     cephfs_metadata     2      39230k      0.04         9840M          30
 			
-issues:
-* need to manually enable and start mds service:
-ln -s /usr/lib/systemd/system/ceph-mds\@.service /etc/systemd/system/multi-user.target.wants/ceph-mds@$HOSTNAME.service
-systemctl enable ceph-mds@$HOSTNAME
-systemctl start ceph-mds@$HOSTNAME
-
 * mon nodes need to create /var/run/ceph/rbd-clients/, or socket bind_and_listen errors, not critical
 
 To add OSD nodes (by Sébastien Han):
